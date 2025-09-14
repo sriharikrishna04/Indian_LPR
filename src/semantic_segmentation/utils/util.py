@@ -58,7 +58,7 @@ def overlay_colour(frame, centroid):
     for i in range(len(centroid)):
         temp = centroid[i]
         box = cv2.boxPoints(temp)
-        box = np.int0(box)
+        box = np.intp(box)
         cv2.drawContours(temp_img, [box], 0, classes[1][0], -1)
     cv2.addWeighted(temp_img, 0.5, frame, 0.5, 0, frame)
     return frame
@@ -94,7 +94,7 @@ def plate_locate(image, size_factor=1, area_thresh=600):
         )
 
         box = cv2.boxPoints(rect)
-        box = np.int0(box)
+        box = np.intp(box)
         box = [[max(0, int(x[0])), max(0, int(x[1]))] for x in box]
         coordinates.append(box)
 

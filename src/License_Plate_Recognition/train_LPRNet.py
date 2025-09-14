@@ -126,7 +126,7 @@ def collate_fn(batch):
         labels.extend(label)
         lengths.append(length)
         filenames.append(filename)
-    labels = np.asarray(labels).flatten().astype(np.int)
+    labels = np.asarray(labels).flatten().astype(int)
 
     return (torch.stack(imgs, 0), torch.from_numpy(labels), lengths, filenames)
 

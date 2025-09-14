@@ -100,7 +100,10 @@ class KaggleDatasetImplementation:
         print("STEP 2: CONVERTING DATASET TO FCOS FORMAT")
         print("="*60)
         
-        convert_cmd = f"""python convert_dataset.py \
+        # Get the directory where this script is located (Indian_LPR)
+        script_dir = Path(__file__).parent.absolute()
+        
+        convert_cmd = f"""cd "{script_dir}" && python convert_dataset.py \
             --images_dir "{self.images_dir}" \
             --labels_dir "{self.labels_dir}" \
             --output_file "{self.output_path}/processed/fcos_dataset.txt" \
@@ -126,7 +129,10 @@ class KaggleDatasetImplementation:
         print("STEP 3: PREPARING LPRNET DATA")
         print("="*60)
         
-        extract_cmd = f"""python prepare_lprnet_dataset.py \
+        # Get the directory where this script is located (Indian_LPR)
+        script_dir = Path(__file__).parent.absolute()
+        
+        extract_cmd = f"""cd "{script_dir}" && python prepare_lprnet_dataset.py \
             --images_dir "{self.images_dir}" \
             --labels_dir "{self.labels_dir}" \
             --output_dir "{self.output_path}/lprnet_plates" \
@@ -152,7 +158,10 @@ class KaggleDatasetImplementation:
         print("STEP 4: TRAINING OBJECT DETECTION MODEL (FCOS)")
         print("="*60)
         
-        train_cmd = f"""python src/object_detection/train.py \
+        # Get the directory where this script is located (Indian_LPR)
+        script_dir = Path(__file__).parent.absolute()
+        
+        train_cmd = f"""cd "{script_dir}" && python src/object_detection/train.py \
             --train_txt "{self.output_path}/processed/fcos_dataset_train.txt" \
             --batch_size 8 \
             --epochs 50 \
@@ -184,7 +193,10 @@ class KaggleDatasetImplementation:
         print("STEP 5: TRAINING LPRNET CHARACTER RECOGNITION")
         print("="*60)
         
-        train_cmd = f"""python src/License_Plate_Recognition/train_LPRNet.py \
+        # Get the directory where this script is located (Indian_LPR)
+        script_dir = Path(__file__).parent.absolute()
+        
+        train_cmd = f"""cd "{script_dir}" && python src/License_Plate_Recognition/train_LPRNet.py \
             --train_img_dirs "{self.output_path}/lprnet_plates/train" \
             --test_img_dirs "{self.output_path}/lprnet_plates/test" \
             --max_epoch 200 \
